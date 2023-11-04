@@ -161,3 +161,128 @@ Here are some compiler options you can use in your TypeScript configuration (`ts
 - `noUnusedParameters`: Reports unused parameters.
 
 By enabling these options, you can catch potential issues and write more maintainable code.
+
+## TypeScript Advanced Types
+
+In TypeScript, you have access to various advanced types that allow you to create custom type aliases, handle different scenarios, and enhance the type safety of your code. This README provides an overview of advanced TypeScript types.
+
+### Type Aliases
+
+Type aliases allow you to create custom names for types, making your code more readable and maintainable. For example:
+
+```ts
+type Employee = {
+  id: number;
+  name: string;
+  retire: (date: Date) => void;
+};
+```
+
+### Union Types
+
+Union types enable a variable to accept one of multiple types. It's useful for scenarios where a variable can have different data types:
+
+```ts
+function kgToLbs(weight: number | string) {
+  if (typeof weight === "number") return weight * 2.2;
+  else return parseInt(weight) * 2.2;
+}
+```
+
+### Intersection Types
+
+Intersection types allow you to combine multiple types into one. This can be particularly useful when you want to create complex types by merging multiple simpler types:
+
+```ts
+type Draggable = {
+  drag: () => void;
+};
+
+type Resizable = {
+  resize: () => void;
+};
+
+type UiWidget = Draggable & Resizable;
+```
+
+### Literal Types
+
+Literal types enable you to specify that a variable must have a specific, exact value:
+
+```ts
+type Quantity = 50 | 100;
+type Metric = "cm" | "inch";
+```
+
+### Nullable Types
+
+Nullable types handle scenarios where variables can have values or be null or undefined:
+
+```ts
+function greet(name: string | null | undefined) {
+  if (name) console.log(name.toUpperCase());
+  else return console.log("Hola!");
+}
+```
+
+### Optional Chaining
+
+Optional chaining simplifies your code and removes the need for null checks when accessing properties of potentially null or undefined objects:
+
+```ts
+customer?.birthdate?.getFullYear();
+customers?.[0];
+log?.("message");
+```
+
+### The Nullish Coalescing Operator
+
+The Nullish Coalescing Operator (`??`) allows you to provide a default value when dealing with null or undefined objects:
+
+```ts
+let speed: number | null = null;
+let ride = {
+  speed: speed ?? 30,
+};
+```
+
+### Type Assertions
+
+Type assertions are used when you know more about the type of a variable than TypeScript does. They specify a different type than the one inferred by the compiler:
+
+```ts
+let phone = document.getElementById("phone") as HTMLInputElement;
+// or
+let phone2 = <HTMLInputElement>document.getElementById("phone2");
+```
+
+## The Unknown Type
+
+The `unknown` type is a type-safe version of `any`. It can represent any value but requires narrowing down to a specific type before performing operations on it:
+
+```ts
+function render(document: unknown) {
+  if (typeof document === "string") {
+    // Narrow down to a specific type before operations
+  }
+}
+```
+
+### The Never Type
+
+The `never` type represents values that never occur. It is often used to annotate functions that never return or always throw an error:
+
+```ts
+function processEvent(): never {
+  while (true) {}
+}
+```
+
+### Compiler Options
+
+When working with TypeScript, you can configure various compiler options in your `tsconfig.json` file to enforce strict type checking and code quality. Some of these options are:
+
+- `strictNullChecks`: Ensures null and undefined are not acceptable values for variables unless explicitly declared as nullable.
+- `allowUnreachableCode`: Reports errors about unreachable code.
+
+These options can help improve code quality and maintainability.

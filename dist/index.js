@@ -1,10 +1,9 @@
 "use strict";
-var Size;
-(function (Size) {
-    Size[Size["Small"] = 0] = "Small";
-    Size[Size["Medium"] = 1] = "Medium";
-    Size[Size["Large"] = 2] = "Large";
-})(Size || (Size = {}));
-let mySize = Size.Medium;
-console.log(mySize);
+let employee = {
+    id: 1,
+    name: "Mukesh ",
+    retire: (date) => {
+        console.log(date);
+    },
+};
 //# sourceMappingURL=index.js.map
