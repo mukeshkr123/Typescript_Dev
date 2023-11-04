@@ -1,4 +1,41 @@
-# TypeScript
+# TypeScript Documentation
+
+1. [Getting Started with TypeScript](#getting-started-with-typescript)
+
+   - [Benefits of TypeScript](#benefits-of-typescript)
+   - [Setting Up the Environment](#setting-up-the-environment)
+   - [Configuring the TypeScript Compiler](#configuring-the-typescript-compiler)
+
+2. [Fundamentals](#fundamentals)
+
+   - [Built-in Types](#built-in-types)
+   - [The Any Type](#the-any-type)
+   - [Arrays](#arrays)
+   - [Tuples](#tuples)
+   - [Enums](#enums)
+   - [Functions](#functions)
+   - [Objects](#objects) -[Compiler Options](#compiler-options)
+
+3. [TypeScript Advanced Types](#typescript-advanced-types)
+
+   - [Type Aliases](#type-aliases)
+   - [Union Types](#union-types)
+   - [Intersection Types](#intersection-types)
+   - [Literal Types](#literal-types)
+   - [Nullable Types](#nullable-types)
+   - [Optional Chaining](#optional-chaining)
+   - [The Nullish Coalescing Operator](#the-nullish-coalescing-operator)
+   - [Type Assertions](#type-assertions)
+   - [The Unknown Type](#the-unknown-type)
+   - [The Never Type](#the-never-type)
+
+4. [Node with TypeScript](#node-with-typescript)
+   - [Executing TypeScript Code with Node](#executing-typescript-code-with-node)
+   - [Setting up an Express Project](#setting-up-an-express-project)
+   - [Creating Basic Routes](#creating-basic-routes)
+   - [Creating a Router](#creating-a-router)
+   - [Parsing Request Bodies](#parsing-request-bodies)
+   - [Building an API](#building-an-api)
 
 ## Getting Started with TypeScript
 
@@ -142,7 +179,7 @@ let employee: {
 };
 ```
 
-## Summary
+### Summary
 
 - TypeScript extends JavaScript by providing static typing and additional types.
 - Avoid using the `any` type when possible, as it undermines the benefits of TypeScript.
@@ -151,7 +188,7 @@ let employee: {
 - Functions can be annotated with parameter and return types.
 - Objects can be explicitly typed, and properties can be marked as `readonly` for immutability.
 
-## Compiler Options
+### Compiler Options
 
 Here are some compiler options you can use in your TypeScript configuration (`tsconfig.json`):
 
