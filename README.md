@@ -286,3 +286,156 @@ When working with TypeScript, you can configure various compiler options in your
 - `allowUnreachableCode`: Reports errors about unreachable code.
 
 These options can help improve code quality and maintainability.
+
+## Node with TypeScript
+
+### Executing TypeScript Code with Node
+
+1. Initialize a new npm project:
+
+   ```bash
+   npm init -y
+   ```
+
+2. Install `ts-node` as a development dependency:
+
+   ```bash
+   npm i -D ts-node
+   ```
+
+3. Add a `start` script to your `package.json`:
+   ```json
+   "scripts": {
+       "start": "ts-node index.ts"
+   }
+   ```
+
+### Setting up an Express Project
+
+To set up an Express project with TypeScript:
+
+1. Install Express and TypeScript dependencies:
+
+   ```bash
+   npm i express
+   npm i -D typescript @types/node @types/express
+   ```
+
+2. Create a TypeScript configuration file:
+
+   ```bash
+   npx tsc --init
+   ```
+
+3. Install `ts-node` globally:
+
+   ```bash
+   npm install -g ts-node
+   ```
+
+4. Create an Express server in your `index.ts` file:
+
+   ```typescript
+   import express from "express";
+   const app = express();
+   app.listen(8000, () => console.log("Server started on port 8000"));
+   ```
+
+5. Install Nodemon as a development dependency:
+
+   ```bash
+   npm i nodemon -D
+   ```
+
+6. Configure Nodemon in your `package.json` by adding a script:
+   ```json
+   "scripts": {
+       "start": "nodemon index.ts"
+   }
+   ```
+
+### Creating Basic Routes
+
+To create a basic route in your Express application, use the following code in your `index.ts`:
+
+```typescript
+import express from "express";
+const app = express();
+
+// Define a route
+app.get("/", (req, res) => {
+  res.send("Hello, world!");
+});
+```
+
+### Creating a Router
+
+You can create a router for your Express application as follows:
+
+```typescript
+import { Router } from "express";
+const router = Router();
+
+// Define a route for the router
+router.get("/", (req, res) => {
+  res.send("List of reminders");
+});
+
+export default router;
+```
+
+### Parsing Request Bodies
+
+To parse request bodies in your Express application, use the `express.json()` middleware and create an interface for your request data:
+
+```typescript
+app.use(express.json());
+
+interface CreateReminderDto {
+  title: string;
+}
+
+app.post("/", (req, res) => {
+  const { title } = req.body as CreateReminderDto;
+  res.json(title);
+});
+```
+
+You can also store the `CreateReminderDto` interface in a separate folder for better organization and reusability.
+
+### Building an API
+
+Create a `Remainder` class to represent reminders:
+
+```typescript
+export default class Remainder {
+  id: number;
+  isComplete: boolean;
+
+  constructor(public title: string) {
+    this.id = Date.now();
+    this.isComplete = false;
+  }
+}
+```
+
+Then, create an API for managing reminders:
+
+```typescript
+import Remainder from "./remainder/remainder";
+
+const remainders: Remainder[] = [];
+
+interface CreateReminderDto {
+  title: string;
+}
+
+app.post("/", (req, res) => {
+  const { title } = req.body as CreateReminderDto;
+  const remainder = new Remainder(title);
+  remainders.push(remainder);
+  res.status(201).json(remainder);
+});
+```
+
+By following these steps, you can optimize your README for clarity and consistency. It provides a comprehensive guide for setting up a Node.js project with TypeScript and creating an Express API.
