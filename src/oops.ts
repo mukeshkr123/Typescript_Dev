@@ -1,6 +1,6 @@
 // creating classes
 class Account {
-  id: number;
+  readonly id: number;
   owner: string;
   balance: number;
 
@@ -13,3 +13,7 @@ class Account {
     this.balance += amount;
   }
 }
+
+let account = new Account(1, "Mosh", 0);
+account.deposit(100);
+console.log(account);

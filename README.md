@@ -475,14 +475,13 @@ app.post("/", (req, res) => {
 });
 ```
 
-By following these steps, you can optimize your README for clarity and consistency. It provides a comprehensive guide for setting up a Node.js project with TypeScript and creating an Express API.
+## Object-Oriented Programming with TypeScript - Classes and Interfaces
 
-## OBJECT ORIENTED WITH TYPESCRIPT
+### Classes and Constructors
 
-## Creating Classes
+In TypeScript, classes are used to create blueprints for objects. They contain properties and methods that define the structure and behavior of objects. Constructors are special methods within a class used to initialize object properties.
 
 ```ts
-// creating classes
 class Account {
   id: number;
   owner: string;
@@ -493,8 +492,102 @@ class Account {
     this.owner = owner;
     this.balance = balance;
   }
+
   deposit(amount: number): void {
     this.balance += amount;
   }
 }
 ```
+
+### Creating Objects
+
+You can create objects from a class using the `new` keyword:
+
+```ts
+let account = new Account(1, "Mosh", 0);
+account.deposit(100);
+console.log(account);
+```
+
+### Read-Only Properties
+
+To make a property read-only, you can use the `readonly` keyword:
+
+```ts
+readonly id: number;
+```
+
+### Access Modifiers
+
+Access modifiers (`public`, `private`, `protected`) control access to properties and methods in a class.
+
+### Parameter Properties
+
+Parameter properties allow you to create and initialize properties in one place within the constructor:
+
+```ts
+constructor(public id: number, private balance: number) {
+}
+```
+
+### Getters and Setters
+
+You can use getters and setters to control access and validation of properties:
+
+```ts
+private _balance = 0;
+get balance(): number {
+  return this._balance;
+}
+set balance(value: number) {
+  if (value < 0)
+    throw new Error();
+  this._balance = value;
+}
+```
+
+### Static Members
+
+Static members belong to the class itself, rather than instances of the class:
+
+```ts
+class Ride {
+  static activeRides = 0;
+}
+Ride.activeRides++;
+```
+
+### Inheritance
+
+Classes can inherit and reuse members from another class. The parent class is known as the base class, while the inheriting class is the derived class.
+
+### Method Overriding
+
+You can override methods in derived classes to provide a different implementation:
+
+```ts
+class Student extends Person {
+  override speak() {
+    console.log("Student speaking");
+  }
+}
+```
+
+### Abstract Classes and Methods
+
+Abstract classes have partial implementations and cannot be instantiated. They are used as a blueprint for derived classes. Abstract methods don't have a body and must be implemented in derived classes.
+
+### Interfaces
+
+Interfaces define the shape of objects, specifying properties and methods that must be implemented by classes that implement the interface.
+
+```ts
+interface Calendar {
+  name: string;
+  addEvent(): void;
+}
+```
+
+### Compiler Options
+
+The `noImplicitOverride` compiler option helps catch errors when attempting to override a method without using the `override` keyword.
