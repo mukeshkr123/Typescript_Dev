@@ -476,3 +476,25 @@ app.post("/", (req, res) => {
 ```
 
 By following these steps, you can optimize your README for clarity and consistency. It provides a comprehensive guide for setting up a Node.js project with TypeScript and creating an Express API.
+
+## OBJECT ORIENTED WITH TYPESCRIPT
+
+## Creating Classes
+
+```ts
+// creating classes
+class Account {
+  id: number;
+  owner: string;
+  balance: number;
+
+  constructor(id: number, owner: string, balance: number) {
+    this.id = id;
+    this.owner = owner;
+    this.balance = balance;
+  }
+  deposit(amount: number): void {
+    this.balance += amount;
+  }
+}
+```

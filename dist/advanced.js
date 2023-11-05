@@ -1,10 +1,7 @@
 "use strict";
-function kgToLbs(weigth) {
-    if (typeof weigth === "number")
-        return weigth * 2.2;
-    else
-        return parseInt(weigth) * 2.2;
+function processEvent() {
+    while (true) { }
 }
-kgToLbs(10);
-kgToLbs("10kg");
+processEvent();
+console.log("Process event");
 //# sourceMappingURL=advanced.js.map
