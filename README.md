@@ -664,7 +664,7 @@ import { Reminder } from "../components/ReminderList";
 
 class ReminderService {
   http = axios.create({
-    baseURL: "https://jsonplaceholder.typicode.com/todos",
+    baseURL: "https://jsonplaceholder.typicode.com",
   });
 
   async getReminders() {
@@ -686,4 +686,30 @@ class ReminderService {
 }
 
 export default new ReminderService();
+```
+
+### Using UseEffect
+
+```tsx
+import reminderService from "./services/reminder";
+
+function App() {
+  const [reminders, setRemainders] = useState<Reminder[]>([]);
+
+  useEffect(() => {
+    loadReminders();
+  }, []);
+
+  const loadReminders = async () => {
+    const reminders = await reminderService.getReminders();
+    setRemainders(reminders);
+  };
+  return (
+    <div>
+      <ReminderList items={reminders} />
+    </div>
+  );
+}
+
+export default App;
 ```
