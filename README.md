@@ -596,7 +596,12 @@ The `noImplicitOverride` compiler option helps catch errors when attempting to o
 
 ### Creating a Component
 
--create component using typescript
+To create a component in React with TypeScript, follow these steps:
+
+1. Define the component's interface to specify the expected prop types.
+2. Create the functional component using the provided props.
+
+Here's an example component named `ReminderList`:
 
 ```tsx
 interface Reminder {
@@ -621,7 +626,9 @@ const ReminderList = ({ items }: ReminderListProps) => {
 export default ReminderList;
 ```
 
-- passing the props
+### Passing Props
+
+You can pass props to components as shown below:
 
 ```tsx
 const reminders = [
@@ -640,9 +647,11 @@ function App() {
 
 ### Using the State Hook
 
-````tsx
+To manage component state, you can use the `useState` hook. Here's an example:
+
+```tsx
 function App() {
-  const [reminders, setRemainders] = useState<Reminder[]>([
+  const [reminders, setReminders] = useState<Reminder[]>([
     {
       id: 1,
       title: "Reminder 1",
@@ -653,10 +662,12 @@ function App() {
       <ReminderList items={reminders} />
     </div>
   );
-}```
-````
+}
+```
 
 ### Calling the Backend
+
+You can interact with a backend API using Axios or a similar library. Here's an example service class `ReminderService`:
 
 ```tsx
 import axios from "axios";
@@ -672,9 +683,9 @@ class ReminderService {
     return (await response).data;
   }
 
-  async addReminder(titles: string) {
+  async addReminder(title: string) {
     const response = await this.http.post("/todos", {
-      title: titles,
+      title: title,
     });
     return response.data;
   }
@@ -688,13 +699,15 @@ class ReminderService {
 export default new ReminderService();
 ```
 
-### Using UseEffect
+### Using useEffect
+
+To fetch data from the backend when the component mounts, you can use the `useEffect` hook. Here's an example:
 
 ```tsx
 import reminderService from "./services/reminder";
 
 function App() {
-  const [reminders, setRemainders] = useState<Reminder[]>([]);
+  const [reminders, setReminders] = useState<Reminder[]>([]);
 
   useEffect(() => {
     loadReminders();
@@ -702,7 +715,7 @@ function App() {
 
   const loadReminders = async () => {
     const reminders = await reminderService.getReminders();
-    setRemainders(reminders);
+    setReminders(reminders);
   };
   return (
     <div>
@@ -716,11 +729,13 @@ export default App;
 
 ### Handling Events
 
+To handle events like removing items, you can pass callback functions as props to child components. Here's an example:
+
 ```tsx
 import reminderService from "./services/reminder";
 
 function App() {
-  const [reminders, setRemainders] = useState<Reminder[]>([]);
+  const [reminders, setReminders] = useState<Reminder[]>([]);
 
   useEffect(() => {
     loadReminders();
@@ -728,50 +743,69 @@ function App() {
 
   const loadReminders = async () => {
     const reminders = await reminderService.getReminders();
-    setRemainders(reminders);
+    setReminders(reminders);
   };
 
   const removeReminder = (id: number) => {
-    setRemainders(reminders.filter((reminder) => reminder.id !== id));
+    setReminders(reminders.filter((reminder) => reminder.id !== id));
   };
   return (
     <div>
-      <ReminderList items={reminders} onRemoveRemainder={removeReminder} />
+      <ReminderList items={reminders} onRemoveReminder={removeReminder} />
     </div>
   );
 }
+```
 
-export default App;
+## Handling Form Submission
+
+To handle form submissions, you can create a form component and pass a callback function to handle the submitted data. Here's an example:
+
+```tsx
+function App() {
+  const [reminders, setReminders] = useState<Reminder[]>([]);
+
+  const addReminder = async (title: string) => {
+    const newReminder = await reminderService.addReminder(title);
+    setReminders([newReminder, ...reminders]);
+  };
+
+  return (
+    <div>
+      <NewReminder onAddReminder={addReminder} />
+    </div>
+  );
+}
 ```
 
 ```tsx
-export interface Reminder {
-  id: number;
-  title: string;
+interface NewReminderProps {
+  onAddReminder: (title: string) => void;
 }
 
-interface ReminderListProps {
-  items: Reminder[];
-  onRemoveRemainder: (id: number) => void;
-}
+const NewReminder = ({ onAddReminder }: NewReminderProps) => {
+  const [title, setTitle] = useState("");
 
-const ReminderList = ({ items, onRemoveRemainder }: ReminderListProps) => {
+  const submitForm = (e: React.FormEvent) => {
+    e.preventDefault();
+    onAddReminder(title);
+    setTitle("");
+  };
+
   return (
-    <ul className="list-group">
-      {items.map((item) => (
-        <li className="list-group-item" key={item.id}>
-          {item.title}
-          <button
-            onClick={() => onRemoveRemainder(item.id)}
-            className="btn btn-outline-danger mx-2 rounded-pill"
-          >
-            Delete
-          </button>
-        </li>
-      ))}
-    </ul>
+    <form onSubmit={submitForm}>
+      <label htmlFor="title"></label>
+      <input
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        id="title"
+        type="text"
+        className="form-control"
+      />
+      <button type="submit" className="btn btn-primary my-3 rounded-pill">
+        Add Reminder
+      </button>
+    </form>
   );
 };
-
-export default ReminderList;
 ```
