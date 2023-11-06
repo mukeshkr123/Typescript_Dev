@@ -637,3 +637,23 @@ function App() {
   );
 }
 ```
+
+### Using the State Hook
+
+````tsx
+function App() {
+  const [reminders, setRemainders] = useState<Reminder[]>([
+    {
+      id: 1,
+      title: "Reminder 1",
+    },
+  ]);
+  return (
+    <div>
+      <ReminderList items={reminders} />
+    </div>
+  );
+}```
+````
+
+### Calling the Backend
