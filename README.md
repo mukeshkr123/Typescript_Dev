@@ -593,3 +593,47 @@ interface Calendar {
 The `noImplicitOverride` compiler option helps catch errors when attempting to override a method without using the `override` keyword.
 
 ## React With TypeScript
+
+### Creating a Component
+
+-create component using typescript
+
+```tsx
+interface Reminder {
+  id: number;
+  title: string;
+}
+
+interface ReminderListProps {
+  items: Reminder[];
+}
+
+const ReminderList = ({ items }: ReminderListProps) => {
+  return (
+    <ul>
+      {items.map((item) => (
+        <li key={item.id}>{item.title}</li>
+      ))}
+    </ul>
+  );
+};
+
+export default ReminderList;
+```
+
+- passing the props
+
+```tsx
+const reminders = [
+  { id: 1, title: "Reminder 1" },
+  { id: 2, title: "Reminder 2" },
+];
+
+function App() {
+  return (
+    <div>
+      <ReminderList items={reminders} />
+    </div>
+  );
+}
+```
