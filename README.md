@@ -591,3 +591,7 @@ interface Calendar {
 ### Compiler Options
 
 The `noImplicitOverride` compiler option helps catch errors when attempting to override a method without using the `override` keyword.
+
+## React With TypeScript
+
+### Creating A React App with TypeScript
