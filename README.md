@@ -809,3 +809,28 @@ const NewReminder = ({ onAddReminder }: NewReminderProps) => {
   );
 };
 ```
+
+## Modules
+
+### Exporting and Importing
+
+-Export
+
+```ts
+export class Circle {
+  constructor(public radius: number) {}
+}
+
+export class Square {
+  constructor(public side: number) {}
+}
+```
+
+-Import
+
+```ts
+import { Circle } from "./shapes";
+
+let circle = new Circle(1);
+console.log(circle.radius);
+```
